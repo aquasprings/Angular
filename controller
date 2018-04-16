@@ -1,0 +1,98 @@
+using AngularProjectFinal.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+namespace AngularCRUD.Controllers
+{
+    public class CustomerController : Controller
+    {
+         
+        public ActionResult Index()
+        {
+            return View();
+        }
+          
+        public JsonResult Get_AllCustomer()
+        {
+            using (DB04TMS170_1718Entities1 Obj = new DB04TMS170_1718Entities1())
+            {
+                List<project_main> Emp = Obj.project_main.ToList();
+                return Json(Emp, JsonRequestBehavior.AllowGet);
+            }
+        }
+      
+        public JsonResult Get_CustomerById(string Id)
+        {
+            using (DB04TMS170_1718Entities1 Obj = new DB04TMS170_1718Entities1())
+            {
+                int EmpId = int.Parse(Id);
+                return Json(Obj.project_main.Find(EmpId), JsonRequestBehavior.AllowGet);
+            }
+        }
+      
+        public string Insert_Customer(project_main Employe)
+        {
+            if (Employe != null)
+            {
+                using (DB04TMS170_1718Entities1 Obj = new DB04TMS170_1718Entities1())
+                {
+                    Obj.project_main.Add(Employe);
+                    Obj.SaveChanges();
+                    return "Customer Added Successfully";
+                }
+            }
+            else
+            {
+                return "Customer Not Inserted! Try Again";
+            }
+        }
+      
+        public string Delete_Customer(project_main Emp)
+        {
+            if (Emp != null)
+            {
+                using (DB04TMS170_1718Entities1 Obj = new DB04TMS170_1718Entities1())
+                {
+                    var Emp_ = Obj.Entry(Emp);
+                    if (Emp_.State == System.Data.Entity.EntityState.Detached)
+                    {
+                        Obj.project_main.Attach(Emp);
+                        Obj.project_main.Remove(Emp);
+                    }
+                    Obj.SaveChanges();
+                    return "Customer Deleted Successfully";
+                }
+            }
+            else
+            {
+                return "Customer Not Deleted! Try Again";
+            }
+        }
+        
+        public string Update_Customer(project_main Emp)
+        {
+            if (Emp != null)
+            {
+                using (DB04TMS170_1718Entities1 Obj = new DB04TMS170_1718Entities1())
+                {
+                    var Emp_ = Obj.Entry(Emp);
+                    project_main EmpObj = Obj.project_main.Where(x => x.customerssnid == Emp.customerssnid).FirstOrDefault();
+                    EmpObj.age = Emp.age;
+                    EmpObj.city = Emp.city;
+                    EmpObj.customername = Emp.customername;
+                    EmpObj.addressline1 = Emp.addressline1;
+                    EmpObj.addressline2 = Emp.addressline2;
+                    EmpObj.sta = Emp.sta;
+                    Obj.SaveChanges();
+                    return "Customer Updated Successfully";
+                }
+            }
+            else
+            {
+                return "Customer Not Updated! Try Again";
+            }
+        }
+    }
+}
