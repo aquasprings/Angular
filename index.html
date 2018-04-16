@@ -1,0 +1,146 @@
+@{
+    ViewBag.Title = "SA Banking Services";
+}
+<script src="~/Scripts/angular.js"></script>
+<script src="~/Scripts/AngularCode.js"></script>
+<style>
+    .btn-space {
+        margin-left: -5%;
+        background-color: cornflowerblue;
+        font-size: large;
+    }
+</style>
+<h2>SA Banking Services</h2>
+<div ng-app="myApp">
+    <div ng-controller="myCtrl" ng-init="GetAllData()" class="divList">
+        <h2 class="divHead">List of Customers</h2>
+        <table cellpadding="12" class="table table-bordered table-hover">
+            <tr>
+                <td>
+                    <b>Customer SSN ID</b>
+                </td>
+                <td>
+                    <b>Name</b>
+                </td>               
+                <td>
+                    <b>Age</b>
+                </td>
+                <td>
+                    <b>Address Line 1</b>
+                </td>
+                <td>
+                    <b>Address Line 2</b>
+                </td>
+                <td>
+                    <b>City</b>
+                </td>
+                <td>
+                    <b>State</b>
+                </td>
+            </tr>
+            <tr ng-repeat="Cus in employees">
+                <td>
+                    {{Cus.customerssnid}}
+                </td>
+                <td>
+                    {{Cus.customername}}
+                </td>                
+                <td>
+                    {{Cus.age}}
+                </td>
+                <td>
+                    {{Cus.addressline1}}
+                </td>
+                <td>
+                    {{Cus.addressline2}}
+                </td>
+                <td>
+                    {{Cus.city}}
+                </td>
+                <td>
+                    {{Cus.sta}}
+                </td>
+
+                <td>
+                    <input type="button" class="btn btn-warning" value="Update" ng-click="UpdateCus(Cus)" />
+                    <input type="button" class="btn btn-danger" value="Delete" ng-click="DeleteCus(Cus)" />
+                </td>
+            </tr>
+        </table>
+        <div class="form-horizontal" role="form">
+            <div class="container">
+                <div class="row">
+                    <h2>
+                        <span id="spn">Add New Customer</span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Customer SSN ID:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputID" placeholder="SSN ID" ng-model="CusID">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Name:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputName" placeholder="Name" ng-model="CusName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Age:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputLabel3" placeholder="Age" ng-model="CusAge">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Address Line 1:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputLabel4" placeholder="Address line 1" ng-model="CusAdd1">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Addresss Line 2:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputLabel5" placeholder="Address line 2" ng-model="CusAdd2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">City:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputCity" placeholder="City" ng-model="CusCity">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">State:</label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="inputState" placeholder="State" ng-model="CusState">
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4">
+                        <input type="button" id="btnSave" class="form-control btn-space" value="Submit" ng-click="InsertData()" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Html.Hidden("EmpID_")
+
+</div> 
