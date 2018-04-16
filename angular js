@@ -56,7 +56,7 @@ app.controller("myCtrl", function ($scope, $http) {
                 $scope.CusState = "";
                 document.getElementById("btnSave").setAttribute("value", "Submit");
                 document.getElementById("btnSave").style.backgroundColor = "cornflowerblue";
-                document.getElementById("spn").innerHTML = "Add New Employee";
+                document.getElementById("spn").innerHTML = "Add New Customer";
             })
         }
     }
@@ -70,7 +70,7 @@ app.controller("myCtrl", function ($scope, $http) {
             alert("Error Occur");
         })
     };
-    $scope.DeleteEmp = function (Emp) {
+    $scope.DeleteCus = function (Emp) {
         $http({
             method: "post",
             url: "http://localhost:50930/Customer/Delete_Customer",
@@ -81,7 +81,7 @@ app.controller("myCtrl", function ($scope, $http) {
             $scope.GetAllData();
         })
     };
-    $scope.UpdateEmp = function (Emp) {
+    $scope.UpdateCus = function (Emp) {
         document.getElementById("EmpID_").value = Emp.customerssnid;
         $scope.CusName = Emp.customername;
         $scope.CusCity = Emp.city;
